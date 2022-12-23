@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.WebJobs.Host.Storage" Version="5.0.0-beta.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
+    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs" Version="3.0.33" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dependencies\DataOperations.Core\DataOperations.Core.csproj" />
+    <ProjectReference Include="..\..\Dependencies\DataOperations.OData\DataOperations.OData.csproj" />
+    <ProjectReference Include="..\..\Dependencies\DataOperations.WebJobs\DataOperations.WebJobs.csproj" />
+    <ProjectReference Include="..\..\GWSAMPLE_BASIC\DataOperations.Data.GWSAMPLE_BASIC\DataOperations.Data.GWSAMPLE_BASIC.csproj" />
+    <ProjectReference Include="..\..\GWSAMPLE_BASIC\DataOperations.WebJobs.GWSAMPLE_BASIC\DataOperations.WebJobs.GWSAMPLE_BASIC.csproj" />
+  </ItemGroup>
+</Project>

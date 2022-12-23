@@ -1,0 +1,3 @@
+        public static IServiceCollection RegisterSetsAsSingletons(this IServiceCollection services)
+        {
+            services.AddSingleton<ServiceRootSet>();

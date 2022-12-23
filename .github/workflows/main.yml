@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+    - 'master'
+    paths-ignore:
+    - '**.md'
+    - 'Misc/**'
+    - '.vscode/**'
+    - '.devcontainer/**'
+    - '.github/**'
+jobs:
+  scripts:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+      - name: Run the build of the zip outputs
+        run: .\publishtobinariesfolder.cmd \BinaryDownloads
+        shell: cmd  
+        
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: \BinaryDownloads\*

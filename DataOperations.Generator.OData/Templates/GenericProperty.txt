@@ -1,0 +1,1 @@
+        public {{TypeName}} {{PropName}} { get; set; }

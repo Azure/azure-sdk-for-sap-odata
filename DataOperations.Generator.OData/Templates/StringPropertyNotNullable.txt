@@ -1,0 +1,18 @@
+        private string _{{PropName}};
+        public string {{PropName}} 
+        { 
+            get { 
+                return _{{PropName}};
+            }
+            set {
+                if(value == null)
+                {
+                    throw new ValidationException("{{PropName}} cannot be null and must have a value.");
+                }
+                else
+                {
+                    _{{PropName}} = value;
+                }
+            }
+        }
+        

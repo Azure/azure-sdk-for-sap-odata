@@ -1,0 +1,15 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "AzureStorageConnectionStringGoesHere",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "FUNCTIONS_EXTENSION_VERSION" : "~4",
+        "BasicHttpAuthHandler:UserName": "UserNameGoesHere",
+        "BasicHttpAuthHandler:Password": "PasswordGoesHere",
+        "ODataHttpClientContext:NamedHttpClientName": "ODataClient",
+        "ODataHttpClientContext:NamedHttpClientBaseUri": "https://BaseUriGoesHere",
+        "ODataOperationsDispatcher:ServiceRootPrefix": "sap/opu/odata/iwbep/GWSAMPLE_BASIC"      
+    }
+}
+  
+

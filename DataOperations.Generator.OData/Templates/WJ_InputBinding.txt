@@ -1,0 +1,6 @@
+    [Binding][AttributeUsage(AttributeTargets.Parameter | AttributeTargets.ReturnValue)] 
+    public class Input_{{NameSpace}}_{{InputClass}}Attribute : Attribute, IInputAttribute 
+    {
+        [AutoResolve] public {{KeyType}} {{KeyName}} { get; set;}
+        public Input_{{NameSpace}}_{{InputClass}}Attribute({{KeyType}} {{KeyName}}) => this.{{KeyName}} = {{KeyName}};
+    }

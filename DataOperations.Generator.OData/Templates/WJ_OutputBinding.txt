@@ -1,0 +1,5 @@
+    [Binding][AttributeUsage(AttributeTargets.Parameter | AttributeTargets.ReturnValue)] 
+    public class Output_{{NameSpace}}_{{InputClass}}Attribute : Attribute, IOutputAttribute {
+        
+    }
+    

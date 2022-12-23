@@ -1,0 +1,3 @@
+        public {{ClassName}}({{CtorType}} {{CtorParamName}}) : base({{CtorParamName}})
+        {
+        }

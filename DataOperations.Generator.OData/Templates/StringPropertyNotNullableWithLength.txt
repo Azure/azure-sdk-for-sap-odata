@@ -1,0 +1,21 @@
+        private string _{{PropName}};
+        public string {{PropName}} 
+        { 
+            get {
+                return _{{PropName}};
+            }
+            set {
+                if(value == null)
+                {
+                    throw new ValidationException("{{PropName}} cannot be null and must have a value.");
+                }
+                if(value.Length > {{MaxLength}})
+                {
+                    throw new ValidationException("{{PropName}} cannot be longer than {{MaxLength}} characters.");
+                }
+                else
+                {
+                    _{{PropName}} = value;
+                }
+            }
+        }

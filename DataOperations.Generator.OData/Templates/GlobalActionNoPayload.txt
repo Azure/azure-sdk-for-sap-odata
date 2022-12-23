@@ -1,0 +1,7 @@
+        public async Task<{{RtnTypeName}}> {{ActionName}}Async({{ParameterType}} {{ParameterName}})
+        {
+            return ({{RtnTypeName}}) await _dispatcher.ExecuteFunctionImportAsync<{{RtnTypeName}}>(
+                "{{ActionName}}", 
+                new Dictionary<string, object>(){{"{{ParameterName}}", {{ParameterName}}}}
+            );
+        }

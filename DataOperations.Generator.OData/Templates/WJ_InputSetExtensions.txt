@@ -1,0 +1,1 @@
+            context.BindToInputSet<Input_{{NameSpace}}_{{SetName}}Attribute, {{SetName}}, {{EntityName}}>((x) => new {{SetName}}(dispatcher));

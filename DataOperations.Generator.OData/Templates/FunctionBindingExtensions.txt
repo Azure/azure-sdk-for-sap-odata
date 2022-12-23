@@ -1,0 +1,76 @@
+using System.Reflection;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host.Config;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace DataOperations.Bindings
+{
+    public static class FunctionBindingExtensions
+    {
+        public static IServiceCollection ConfigureClientAndBindings(this IServiceCollection services)
+        {
+            
+            services.AddWebJobs(x => { return; }).AddExtension<DataExtensionConfigProvider>();
+            foreach (Assembly ass in GetAllAssemblies())
+            {
+                RegisterTypes(services, ass, "IBaseDTOWithIDAndETag");
+            }
+
+            return services;
+  
+        }
+
+        public static List<Assembly> GetAllAssemblies()
+        {
+            // USE REFLECTION TO FIND ALL OF THE referenced libs IBaseDTOWithIDAndETag and register them with the DI Container
+            List<Assembly> listOfAssemblies = new List<Assembly>();
+            var mainAsm = Assembly.GetEntryAssembly(); listOfAssemblies.Add(mainAsm);
+            foreach (var refAsmName in mainAsm.GetReferencedAssemblies())
+            {
+                listOfAssemblies.Add(Assembly.Load(refAsmName));
+            }
+
+            return listOfAssemblies;
+        }
+
+        public static void RegisterTypes(IServiceCollection services, Assembly ass, string InterfaceName)
+        {
+            GetMatchingTypesForInterface(ass, InterfaceName)
+            .ForEach(x =>
+                {
+                    RegisterSingletonOfTypeForDI(services, x);
+                }
+            );
+            
+        }
+
+        public static List<Type> GetMatchingTypesForInterface(Assembly ass, string InterfaceName)
+        {
+            return ass.GetTypes()
+                .Where(x => !x.IsAbstract && x.IsClass && x.GetInterface(InterfaceName) != null)
+                .ToList();
+        }
+
+        private static void RegisterSingletonOfTypeForDI(IServiceCollection services, Type x)
+        {
+            Type typ = typeof(BaseDTOAsyncCollector<>).MakeGenericType(x.GetType());
+            services.AddSingleton(typ);
+            Console.WriteLine("Added for Binding" + typ.FullName);
+        }
+
+        public static void BindToCollector<T,K>(ExtensionConfigContext context, IOperationsDispatcher dispatcher) where T: Attribute, IOutputAttribute where K: IBaseDTOWithIDAndETag 
+        {
+            context.AddBindingRule<T>().BindToCollector<K>((x) => new BaseDTOAsyncCollector<K>(dispatcher));
+            Console.WriteLine("Bound to Collector" + typeof(K).FullName);
+        }
+        public static void BindToInput<T,K>(ExtensionConfigContext context, Func<T, K> execThis) where T: Attribute, IInputAttribute where K: IBaseDTOWithIDAndETag 
+        {
+            context.AddBindingRule<T>().BindToInput<K>(execThis);
+        }
+        public static void BindToInputSet<T,K,L>(ExtensionConfigContext context, Func<T, K> execThis) where T: Attribute, IInputAttribute where K: IQuerySetOperations<L> where L : IBaseDTOWithIDAndETag 
+        {
+            context.AddBindingRule<T>().BindToInput<K>(execThis);
+        }
+
+    }
+}

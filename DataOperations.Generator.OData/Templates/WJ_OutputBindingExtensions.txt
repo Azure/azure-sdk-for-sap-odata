@@ -1,0 +1,1 @@
+            context.BindToCollector<Output_{{NameSpace}}_{{ClassName}}Attribute, {{ClassName}}>(dispatcher);

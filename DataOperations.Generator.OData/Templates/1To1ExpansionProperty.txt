@@ -1,0 +1,2 @@
+        public Deferred<{{TypeName}}> {{PropName}} {get; set;}
+

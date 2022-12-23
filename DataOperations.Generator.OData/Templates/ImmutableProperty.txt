@@ -1,0 +1,11 @@
+        private {{TypeName}} _{{PropName}};
+        public {{TypeName}} {{PropName}} 
+        { 
+            get { 
+                return _{{PropName}};
+            }
+            init {
+                _{{PropName}} = value;
+            }
+        }
+        

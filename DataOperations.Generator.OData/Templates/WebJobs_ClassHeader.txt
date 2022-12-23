@@ -1,0 +1,6 @@
+using Microsoft.Azure.WebJobs.Description;
+using Microsoft.Azure.WebJobs.Host.Config;
+using DataOperations.OData; 
+using {{NameSpace}}; 
+namespace DataOperations.Bindings.Generated
+{

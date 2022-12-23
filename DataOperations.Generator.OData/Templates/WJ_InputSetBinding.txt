@@ -1,0 +1,2 @@
+        [Binding][AttributeUsage(AttributeTargets.Parameter | AttributeTargets.ReturnValue)] 
+        public class Input_{{NameSpace}}_{{SetName}}Attribute : Attribute, IInputAttribute {}

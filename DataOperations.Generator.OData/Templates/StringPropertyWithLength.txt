@@ -1,0 +1,17 @@
+        private string _{{PropName}};
+        public string {{PropName}} 
+        { 
+            get { 
+                return _{{PropName}};
+            }
+            set {
+                if(value.Length > {{MaxLength}})
+                {
+                    throw new ValidationException("{{PropName}} cannot be longer than {{MaxLength}} characters.");
+                }
+                else
+                {
+                    _{{PropName}} = value;
+                }
+            }
+        }

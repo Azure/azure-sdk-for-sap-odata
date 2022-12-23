@@ -1,0 +1,1 @@
+       public Lazy<List<{{ClassName}}>> {{ClassName}}_Set { get; set; } = new Lazy<List<{{ClassName}}>>();

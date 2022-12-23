@@ -1,0 +1,5 @@
+    public static class BindingHelper {
+        
+        public static void ConfigureBindings(ExtensionConfigContext context, IOperationsDispatcher dispatcher)
+        {
+            
