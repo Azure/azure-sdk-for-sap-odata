@@ -20,7 +20,18 @@ jobs:
         run: .\publishtobinariesfolder.cmd \BinaryDownloads
         shell: cmd  
         
-      - uses: actions/upload-artifact@v3
+      - name: Navigate to published outputs
+        run: |
+          cd \BinaryDownloads
+
+      - name: Commit files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Add changes"
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@main
         with:
-          name: my-artifact
-          path: \BinaryDownloads\*
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
