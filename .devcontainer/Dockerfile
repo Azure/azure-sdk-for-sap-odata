@@ -1,6 +1,10 @@
 # Find the Dockerfile at this URL
 # https://github.com/Azure/azure-functions-docker/blob/dev/host/4/bullseye/amd64/dotnet/dotnet-inproc/dotnet-core-tools.Dockerfile
-FROM mcr.microsoft.com/azure-functions/dotnet:4-dotnet6-core-tools
+FROM mcr.microsoft.com/devcontainers/dotnet:6.0
+
+## AZURE FUNCTIONS CORE TOOLS ##
+# Uncomment the below to install Azure Functions Core Tools
+RUN npm i -g azure-functions-core-tools@4 --unsafe-perm true
 
 # Uncomment following lines If you want to enable Development Container Script
 # For more details https://github.com/microsoft/vscode-dev-containers/tree/main/script-library
