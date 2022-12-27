@@ -1,6 +1,6 @@
 # Azure SDK for SAP OData 🚀
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=555472565)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FWillEastbury%2FSAPOData%2Fmaster%2Fbuildandpublish%2Fazuredeploy.json)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FWillEastbury%2FSAPOData%2Fmaster%2Fbuildandpublish%2Fazuredeploy.json)
 
 Use this repos to enable services like [Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-overview) <⚡> to consume [SAP OData services](https://api.sap.com/products/SAPS4HANA/apis/ODATA) and work with plain-old-class-objects (POCO) without any dependencies on other libraries. Marshalling the OData semantics into the SDK reduces initial integration effort and allows developers to focus on business logic quicker.
 
@@ -18,7 +18,7 @@ Currently supported output language is C#. You may extend by adding templates fo
 ## Prerequisites 👨🏾‍🎓
 
 - [Azure Subscription](https://azure.microsoft.com/free/)
-- Local Development setup with [Dotnet 6](https://dotnet.microsoft.com/download/dotnet/6.0) and [Azure Functions Core tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) or [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=555472565) - pre-configured.
+- Local Development setup with [Dotnet 6](https://dotnet.microsoft.com/download/dotnet/6.0) and [Azure Functions Core tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) or [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335) - pre-configured.
 - Any OData Service (for example [SAP Mock Server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html), [SAP Demo Gateway (OData Catalog Service)](https://sapes5.sapdevcenter.com/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/), [S/4HANA Cloud](https://api.sap.com/products/SAPS4HANACloud/apis/ODATAV4), [SAP API Business Hub](https://api.sap.com/), [SAP SuccessFactors](https://api.sap.com/products/SAPSuccessFactors/apis/ODATA), etc.)
 
 > **Note**
@@ -88,7 +88,7 @@ Have a look at the [SAPBindingDemo.cs](Samples/FunctionsSample.GWSAMPLE_BASIC/SA
 There are multiple ways to deploy this functions project to Azure. In this example we use the [Azure Functions extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) for VS Code to deploy the project. Learn more about [this process on Microsoft learn](https://learn.microsoft.com/azure/azure-functions/functions-create-first-function-resource-manager?tabs=azure-cli)
 
 1. Create an Azure Functions app with Dotnet 6 and Windows Consumption plan using the [VS Code extension for Azure](https://code.visualstudio.com/docs/azure/extensions) or use below button
-2. Deploy to Functions App from VS Code or [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=555472565) (right click in the explorer on the project folder and select **"Deploy to Function App..."** or execute `func azure functionapp publish`)
+2. Deploy to Functions App from VS Code or [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335) (right click in the explorer on the project folder and select **"Deploy to Function App..."** or execute `func azure functionapp publish`)
 3. Browse your new app powered by the Azure SDK for SAP OData (it takes a while the first time): `https://your-function-app.azurewebsites.net/api/Products/10`
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FWillEastbury%2FSAPOData%2Fmaster%2Fbuildandpublish%2Fazuredeploy.json)
