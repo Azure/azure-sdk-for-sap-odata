@@ -46,9 +46,11 @@ For Linux
 
 ```bash
 cd azure-sdk-for-sap-odata/BinaryDownloads
-unzip DataOperations.Generator.OData_linux-x64.zip -d /Generator
-cd /Generator/publishout
-./DataOperations.Generator.OData --inputfile /Generator/publishout/metadata.xml --outputfolder /SDK --templatefolder /Generator/publishout/Templates --samples true
+unzip DataOperations.Generator.OData_linux-x64.zip -d /workspaces/Generator
+cd /workspaces/Generator/publishout
+chmod +x DataOperations.Generator.OData
+chmod -R 777 /workspaces/Generator/publishout
+./DataOperations.Generator.OData --inputfile /workspaces/Generator/publishout/metadata.xml --outputfolder /workspaces/SDK --templatefolder /workspaces/Generator/publishout/Templates --samples true
 ```
 
 For Mac
@@ -67,9 +69,12 @@ cd /Generator/publishout
 - Execute `func host start` and start coding😎👌🔥
 - Navigate to `http://localhost:7071/api/Products/10` to see the generated OData service in action listing the first 10 products.
 
+> **Note**
+> Adjust to `https://your-gh-domain.preview.app.github.dev/api/Products/10` for Codespaces.
+
 Learn more about the local Azure Functions start commands per project language [here](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash#start).
 
-> **NOTE**
+> **Note**
 > Use the [TestClient sample](/Samples/TestClientSample.GWSAMPLE_BASIC/) for local execution without Azure Functions environment in case you are looking for a generic implementation.
 
 ### How to use with Azure Functions <⚡>
