@@ -61,6 +61,6 @@ You get two folders in your output folder. One containing the helper classes alw
 Build the generator from scratch with the following commands on Windows. It puts the generator with an example OData metadata file in `C:\outputzips\publishout`. Otherwise use the pre-built generator from the release.
 
 ```cmd
-cd SAPOData
+cd azure-sdk-for-sap-odata
 .\publishtobinariesfolder.cmd local-path\BinaryDownloads
 ```
