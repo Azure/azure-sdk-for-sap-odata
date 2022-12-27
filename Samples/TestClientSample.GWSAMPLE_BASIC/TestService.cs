@@ -26,7 +26,7 @@ namespace GWSAMPLE_BASIC
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
 
-            _logger.LogInformation("Test is starting.");
+            _logger.LogInformation("Test is starting...");
 
             // get product 'ht-1023'
             var product = await ps.GetAsync("HT-1023");
