@@ -1,10 +1,10 @@
 # Azure SDK for SAP OData 🚀
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FWillEastbury%2FSAPOData%2Fmaster%2Fbuildandpublish%2Fazuredeploy.json)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-sap-odata%2Fmain%2Fbuildandpublish%2Fazuredeploy.json)
 
 Use this repos to enable services like [Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-overview) <⚡> to consume [SAP OData services](https://api.sap.com/products/SAPS4HANA/apis/ODATA) and work with plain-old-class-objects (POCO) without any dependencies on other libraries. Marshalling the OData semantics into the SDK reduces initial integration effort and allows developers to focus on business logic quicker.
 
-Currently supported output language is C#. You may extend by adding templates for other languages [here](https://github.com/WillEastbury/SAPOData/tree/master/DataOperations.Generator.OData/Templates). Consumers of the SDK can be coded in any language.
+Currently supported output language is C#. You may extend by adding templates for other languages [here](DataOperations.Generator.OData/Templates). Consumers of the SDK can be coded in any language.
 
 ![Illustration of the process flow for the C# SDK generation](/Misc/img/generator-flow.gif)
 [penguin gif source](https://tenor.com/view/happy-dance-baby-penguin-cute-gif-13901365)
@@ -30,13 +30,13 @@ Currently supported output language is C#. You may extend by adding templates fo
 ## Getting Started 🚀
 
 - Get your OData service metadata as file or URL
-- Clone this repo `git clone https://github.com/WillEastbury/SAPOData.git`
+- Clone this repo `git clone https://github.com/Azure/azure-sdk-for-sap-odata.git`
 - Feed your OData metadata to the generator:
 
 For Windows
 
 ```cmd
-cd SAPOData\BinaryDownloads
+cd azure-sdk-for-sap-odata\BinaryDownloads
 Expand-Archive DataOperations.Generator.OData_win-x64.zip C:\Generator
 cd C:\Generator\publishout
 .\DataOperations.Generator.OData.exe --inputfile C:\Generator\publishout\metadata.xml --outputfolder C:\SDK --templatefolder C:\Generator\publishout\Templates --samples true
@@ -45,7 +45,7 @@ cd C:\Generator\publishout
 For Linux
 
 ```bash
-cd SAPOData/BinaryDownloads
+cd azure-sdk-for-sap-odata/BinaryDownloads
 unzip DataOperations.Generator.OData_linux-x64.zip -d /Generator
 cd /Generator/publishout
 ./DataOperations.Generator.OData --inputfile /Generator/publishout/metadata.xml --outputfolder /SDK --templatefolder /Generator/publishout/Templates --samples true
@@ -54,7 +54,7 @@ cd /Generator/publishout
 For Mac
 
 ```bash
-cd SAPOData/BinaryDownloads
+cd azure-sdk-for-sap-odata/BinaryDownloads
 unzip DataOperations.Generator.OData_osx-x64.zip -d /Generator
 cd /Generator/publishout
 ./DataOperations.Generator.OData --inputfile /Generator/publishout/metadata.xml --outputfolder /SDK --templatefolder /Generator/publishout/Templates --samples true
@@ -91,7 +91,7 @@ There are multiple ways to deploy this functions project to Azure. In this examp
 2. Deploy to Functions App from VS Code or [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335) (right click in the explorer on the project folder and select **"Deploy to Function App..."** or execute `func azure functionapp publish`)
 3. Browse your new app powered by the Azure SDK for SAP OData (it takes a while the first time): `https://your-function-app.azurewebsites.net/api/Products/10`
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FWillEastbury%2FSAPOData%2Fmaster%2Fbuildandpublish%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-sap-odata%2Fmain%2Fbuildandpublish%2Fazuredeploy.json)
 
 ## Understand your generated SDK structure🫀
 
