@@ -18,7 +18,7 @@ Currently supported output language is C#. You may extend by adding templates fo
 ## Prerequisites 👨🏾‍🎓
 
 - [Azure Subscription](https://azure.microsoft.com/free/)
-- Local Development setup with [Dotnet 6](https://dotnet.microsoft.com/download/dotnet/6.0) and [Azure Functions Core tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) or [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335) - pre-configured.
+- Local Development setup with [Dotnet 6](https://dotnet.microsoft.com/download/dotnet/6.0) and [Azure Functions Core tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) or [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335).
 - Any OData Service (for example [SAP Mock Server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html), [SAP Demo Gateway (OData Catalog Service)](https://sapes5.sapdevcenter.com/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/), [S/4HANA Cloud](https://api.sap.com/products/SAPS4HANACloud/apis/ODATAV4), [SAP API Business Hub](https://api.sap.com/), [SAP SuccessFactors](https://api.sap.com/products/SAPSuccessFactors/apis/ODATA), etc.)
 
 > **Note**
@@ -30,10 +30,10 @@ Currently supported output language is C#. You may extend by adding templates fo
 ## Getting Started 🚀
 
 - Get your OData service metadata as file or URL
-- Clone this repo `git clone https://github.com/Azure/azure-sdk-for-sap-odata.git`
+- `git clone https://github.com/Azure/azure-sdk-for-sap-odata.git`
 - Feed your OData metadata to the generator:
 
-For Windows
+### For Windows
 
 ```cmd
 cd azure-sdk-for-sap-odata\BinaryDownloads
@@ -42,7 +42,7 @@ cd C:\Generator\publishout
 .\DataOperations.Generator.OData.exe --inputfile C:\Generator\publishout\metadata.xml --outputfolder C:\SDK --templatefolder C:\Generator\publishout\Templates --samples true
 ```
 
-For Linux
+### For Linux
 
 ```bash
 cd azure-sdk-for-sap-odata/BinaryDownloads
@@ -53,7 +53,7 @@ chmod -R 777 /workspaces/Generator/publishout
 ./DataOperations.Generator.OData --inputfile /workspaces/Generator/publishout/metadata.xml --outputfolder /workspaces/SDK --templatefolder /workspaces/Generator/publishout/Templates --samples true
 ```
 
-For Mac
+### For Mac
 
 ```bash
 cd azure-sdk-for-sap-odata/BinaryDownloads
@@ -67,7 +67,8 @@ cd /Generator/publishout
 - Maintain respective [`local.settings.json`](/Samples/FunctionsSample.GWSAMPLE_BASIC/local.settings_sample.json) with your SAP OData service setup and credentials. Have a look at the provided sample file local.settings_sample.json.
 - Open the solution in Visual Studio or Visual Studio Code.
 - Execute `func host start` and start coding😎👌🔥
-- Navigate to `http://localhost:7071/api/Products/10` to see the generated OData service in action listing the first 10 products.
+- Call `http://localhost:7071/api/Products/10` to see the generated OData service in action listing the first 10 products.
+- Use provided [call library](Samples/FunctionsSample.GWSAMPLE_BASIC/odata-product-sample.http) with [VS Code REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) for convenience.
 
 > **Note**
 > Adjust to `https://your-gh-domain.preview.app.github.dev/api/Products/10` for Codespaces.
@@ -83,7 +84,7 @@ Have a look at the [SAPBindingDemo.cs](Samples/FunctionsSample.GWSAMPLE_BASIC/SA
 
 - **http Trigger**: specifies the http method and route (e.g. /Products/{param})
 - **SAP Input Binding**: enables complex pre-flight requests for SAP business objects and functions served by the OData service setting the scene for the actual request. This simplifies the request structure and puts focus on the business logic.
-- **SAP Output Binding**: enables complex post-processing of the SAP business object altered in the function marshalling the required OData call to finish the request.
+- **SAP Output Binding**: enables complex post-processing of the SAP business object altered in the function, marshalling the required OData call to finish the request.
 
 > **Note**
 > The described approach in this repos is applicable to other Azure PaaS offerings like Azure App Service. See the [Azure App Service SAP Cloud SDK quickstart for JavaScript](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) for reference.
