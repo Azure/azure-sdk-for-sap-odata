@@ -4,6 +4,9 @@ FROM mcr.microsoft.com/devcontainers/dotnet:6.0
 
 ## AZURE FUNCTIONS CORE TOOLS ##
 # Uncomment the below to install Azure Functions Core Tools
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y nodejs \
+    npm
 RUN npm i -g azure-functions-core-tools@4 --unsafe-perm true
 
 # Uncomment following lines If you want to enable Development Container Script

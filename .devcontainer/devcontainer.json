@@ -1,5 +1,5 @@
 {
-	"name": "Azure Functions & C# - .NET 6 (In-Process)",
+	"name": "Azure Functions - .NET 6",
 	"dockerFile": "Dockerfile",
 	"forwardPorts": [ 7071 ],
 
@@ -20,7 +20,5 @@
 
 	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
-	"features": {
-		"ghcr.io/devcontainers/features/node:1": {}
-	}
+	"features": {}
 }
