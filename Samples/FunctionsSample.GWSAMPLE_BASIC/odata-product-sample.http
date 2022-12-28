@@ -1,5 +1,6 @@
 GET http://localhost:7071/api/Products/10 HTTP/1.1
 content-type: application/json
+x-ms-token-aad-access-token: your-access-token-if-any
 
 ###
 
