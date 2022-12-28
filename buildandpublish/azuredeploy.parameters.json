@@ -2,20 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "functionAppName": {
-      "value": "[format('func-{0}', uniqueString(resourceGroup().id))]"
-    },
-    "storageAccountType": {
-      "value": "Standard_LRS"
-    },
-    "location": {
-      "value": "[resourceGroup().location]"
-    },
-    "functionWorkerRuntime": {
-      "value": "dotnet"
-    },
-    "packageUri": {
-      "value": "d:\\home\\data\\SitePackages"
-    }
+    
   }
 }
