@@ -16,19 +16,15 @@ jobs:
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
-      - name: Run the build of the zip outputs
-        run: .\publishtobinariesfolder.cmd \BinaryDownloads
+      - name: Run the build of the zip outputs in the local git folder BinaryDownloads
+        run: .\publishtobinariesfolder.cmd D:\a\azure-sdk-for-sap-odata\azure-sdk-for-sap-odata\BinaryDownloads
         shell: cmd  
-        
-      - name: Navigate to published outputs
-        run: |
-          cd \BinaryDownloads
 
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -a -m "Add changes"
+          git commit -a -m "Add new binaries"
       
       - name: Push changes
         uses: ad-m/github-push-action@master
