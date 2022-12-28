@@ -53,7 +53,7 @@ namespace GWSAMPLE_BASIC
             Product pro = await ps.GetAsync("HT-1023");
             if(pro.ProductID != "HT-1023") throw new Exception("Failed GET");
             _logger.LogInformation(pro.Description);
-            _logger.LogInformation("Test is complete.");
+            _logger.LogInformation("Test is complete!");
         }
     }
 }
