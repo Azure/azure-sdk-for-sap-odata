@@ -91,15 +91,12 @@ Have a look at the [SAPBindingDemo.cs](Samples/FunctionsSample.GWSAMPLE_BASIC/SA
 > **Note**
 > The described approach in this repos is applicable to other Azure PaaS offerings like Azure App Service. See the [Azure App Service SAP Cloud SDK quickstart for JavaScript](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) for reference.
 
-### Deploy to Azure🪂
+## Deploy to Azure🪂
 
-There are multiple ways to deploy this functions project to Azure. In this example we use the [Azure Functions extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) for VS Code to deploy the project. Learn more about [this process on Microsoft learn](https://learn.microsoft.com/azure/azure-functions/functions-create-first-function-resource-manager?tabs=azure-cli)
+There are multiple ways to deploy this project to Azure. We provide two options in this repository:
 
-1. Create an Azure Functions app with Dotnet 6 and Windows Consumption plan using the [VS Code extension for Azure](https://code.visualstudio.com/docs/azure/extensions) or use below button
-2. Deploy to Functions App from VS Code or [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335) (right click in the explorer on the project folder and select **"Deploy to Function App..."** or execute `func azure functionapp publish`)
-3. Browse your new app powered by the Azure SDK for SAP OData (it takes a while the first time): `https://your-function-app.azurewebsites.net/api/Products/10`
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-sap-odata%2Fmain%2Fbuildandpublish%2Fazuredeploy.json)
+1. via template deployment and VS Code extension - more information is available [here](documentation/DEPLOYMENT-VSCODE.md)
+2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`  - more information is available [here](documentation/DEPLOYMENT-AZD.md) **UNDER CONSTRUCTION**
 
 ## Understand your generated SDK structure🫀
 
@@ -107,29 +104,9 @@ You get two folders in your output folder. One containing the helper classes alw
 
 Learn more about the generated SDK structure [here](/DataOperations.Generator.OData/README.md).
 
-## Authentication with Azure AD 🔐
+## What's next?
 
-[Configure](https://learn.microsoft.com/azure/app-service/configure-authentication-provider-aad?toc=%2Fazure%2Fazure-functions%2Ftoc.json) your App Service or Azure Functions app to use Azure AD login. Use standard variable `X-MS-TOKEN-AAD-ACCESS-TOKEN` to retrieve the access token from the request header. [Learn more](https://learn.microsoft.com/azure/app-service/configure-authentication-oauth-tokens#retrieve-tokens-in-app-code)
-
-Consider SAP Principal Propagation for your authentication scenario handled by [Azure API Management](https://learn.microsoft.com/azure/api-management/sap-api#production-considerations).
-
-[Learn more](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Request%20OAuth2%20access%20token%20from%20SAP%20using%20AAD%20JWT%20token.xml)
-
-## Token handling
-
-The generated SDK handles ETags for update operations automatically. For CSRF tokens it relies on a centralized solutions with [Azure API Management policies](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Get%20X-CSRF%20token%20from%20SAP%20gateway%20using%20send%20request.policy.xml) rather than implementing it in every client. Find a complete policy including SAP Principal Propagation [here](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Request%20OAuth2%20access%20token%20from%20SAP%20using%20AAD%20JWT%20token.xml). In case you require a client-side solution for CSRF have a look at [this class](Dependencies/DataOperations.OData/DTO/BaseDTOWithIDAndETag.cs) to get started.
-
-Azure AD tokens are handled by Azure without any code dependencies. Use standard variable `X-MS-TOKEN-AAD-ACCESS-TOKEN` to retrieve the access token from the request header and work with [TokenAuthHandler](Dependencies/DataOperations.Core/Auth/TokenAuthHandler.cs). [Learn more](https://learn.microsoft.com/azure/app-service/configure-authentication-oauth-tokens#retrieve-tokens-in-app-code)
-
-## Connectivity to SAP backends and secure virtual network access 🔌
-
-SAP backends on Azure typically run in fully isolated virtual networks. There are multiple ways to connect to them. Most popular ones are:
-
-- Integrate your Azure Function App with an Azure virtual network (VNet). [Learn more](https://learn.microsoft.com/azure/azure-functions/functions-networking-options).
-- Private Endpoints for Azure Functions. [Learn more](https://learn.microsoft.com/azure/azure-functions/functions-create-vnet?source=recommendations)
-- User Azure API Management for OData with SAP Principal Propagation. [Learn more](https://learn.microsoft.com/azure/api-management/sap-api#production-considerations)
-
-VNet integration enables your app to securely access resources in your VNet, such as your SAP Gateway, but doesn't block public access to your Function app. To achieve full private connectivity for the app service too, look into private endpoints.
+You can do a lot more once the app is deployed. Curious? We go you covered with some more information [here](documentation/WHATS-NEXT.md)
 
 ## Troubleshooting 🩺
 
@@ -139,24 +116,9 @@ VNet integration enables your app to securely access resources in your VNet, suc
 - [Azure API Management Request tracing](https://learn.microsoft.com/azure/api-management/api-management-howto-api-inspector)
 - [Azure API Management Gateway logs](https://learn.microsoft.com/azure/api-management/api-management-howto-use-azure-monitor#view-diagnostic-data-in-azure-monitor)
 
-## How is this effort different from existing OpenAPI projects? 🤔
+## Additional resources
 
-Existing OpenAPI projects are great for generating client libraries for REST APIs. However, they are sub-optimal for generating client libraries for OData services, because of the additional layer of semantics OData offers.
-
-In case you favor OpenAPI, have a look at below projects instead:
-
-- [Kiota](https://microsoft.github.io/kiota/)
-- [AutoREST](https://github.com/Azure/autorest)
-- [OData to OpenAPI Generator](https://aka.ms/ODataOpenAPI)
-
-## Related efforts and repos🖇️
-
-- [**SAP's Cloud SDK** on Azure App Service Quickstart](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart)
-- [Visual Studio extension for generating client code for OData Services](https://learn.microsoft.com/odata/connectedservice/getting-started)
-- [OData CLI](https://learn.microsoft.com/odata/odatacli/getting-started)
-- [.NET project showcasing integration of Azure AD with Azure API Management for SAP OData consumption leveraging Principal Propagation](https://github.com/MartinPankraz/AzureSAPODataReader)
-- [OData to OpenAPI converter](https://aka.ms/ODataOpenAPI)
-- [SAP ABAP OpenAPI UI](https://blogs.sap.com/2022/03/31/abap-openapi-ui-v2-a-long-overdue-update/)
+We compared to existing OpenAPI projects, collected additional resources, related efforts and projects [here](documentation/ADDITIONAL-RESOURCES.md).
 
 ## Contributing👩🏼‍🤝‍👨🏽
 
