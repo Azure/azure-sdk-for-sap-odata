@@ -1,8 +1,13 @@
 # Understand your generated SDK structure🫀
 
+The Azure SDK for SAP OData requires class objects to make calls to OData services and receive typed responses. The generator takes care of that process building the foundation for the deployment to Azure.
+
+![Illustration of the process flow for the C# SDK generation](/assets/img/generator-flow.gif)
+[penguin gif source](https://tenor.com/view/happy-dance-baby-penguin-cute-gif-13901365)
+
 You get two folders in your output folder. One containing the helper classes always named "Dependencies" and the other containing the individually generated classes for your OData service. The sub folder WebJobs refers to the Azure Functions bindings.
 
-![Illustration of the dependencies and structure of the SDK](/Misc/img/dependencies.png)
+![Illustration of the dependencies and structure of the SDK](/assets/img/dependencies.png)
 
 📂Dependencies
 

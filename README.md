@@ -4,18 +4,15 @@
 
 Use this repos to enable services like [Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-overview) <⚡> to consume [SAP OData services](https://api.sap.com/products/SAPS4HANA/apis/ODATA) and work with plain-old-class-objects (POCO) without any dependencies on other libraries.
 
-Marshalling the OData semantics into the SDK reduces initial integration effort and allows developers to focus on business logic quicker.
+Marshalling the OData semantics into the SDK **reduces initial integration effort** and allows developers to **focus on business logic quicker**.
 
 Currently supported output language is C#. You may extend by adding templates for other languages [here](DataOperations.Generator.OData/Templates). Consumers of the SDK can be coded in any language.
 
-![Illustration of the process flow for the C# SDK generation](/Misc/img/generator-flow.gif)
-[penguin gif source](https://tenor.com/view/happy-dance-baby-penguin-cute-gif-13901365)
+> **Note** - due to the nature of the SDK it can be applied to apps or functions coded in NodeJS too.
 
-> **Note**
-> Due to the nature of the SDK it can be applied to apps or functions coded in NodeJS too.
+![Illustration of the function app flow with the OData SDK](/assets/img/function-app-overview.png)
 
-> **Note**
-> In case you prefer SAP's own Cloud SDK for your Azure app development, have a look at [this sister project](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) deploying to Azure App Service.
+> **Note** - in case you prefer SAP's own Cloud SDK for your Azure app development, have a look at [this sister project](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) deploying to Azure App Service.
 
 ## Prerequisites 👨🏾‍🎓
 
@@ -24,7 +21,7 @@ Currently supported output language is C#. You may extend by adding templates fo
 - Any OData Service (for example [SAP Mock Server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html), [SAP Demo Gateway (OData Catalog Service)](https://sapes5.sapdevcenter.com/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/), [S/4HANA Cloud](https://api.sap.com/products/SAPS4HANACloud/apis/ODATAV4), [SAP API Business Hub](https://api.sap.com/), [SAP SuccessFactors](https://api.sap.com/products/SAPSuccessFactors/apis/ODATA), S/4HANA Fully-Activated appliance from [SAP CAL](https://cal.sap.com/), your own in-house SAP system, etc.)
 
 > **Note**
-> The SAP mock server is a separate project and not part of this repo. You can find the mock server [here](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html).
+> The SAP mock server is a separate project and **not** part of this repo. You can find the mock server [here](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html).
 
 > **Note**
 > You can use the [SAP API Business Hub](https://api.sap.com/) to get a free trial of SAP OData services or leverage the public demo system ES5. Find the GWSAMPLE_BASIC demo service on ES5 [here](https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata). See SAP's [blog post](https://blogs.sap.com/2017/12/05/new-sap-gateway-demo-system-available/) about ES5 for more details and how to request a user.
@@ -33,7 +30,7 @@ Currently supported output language is C#. You may extend by adding templates fo
 
 - Get your OData service metadata as file or URL
 - `git clone https://github.com/Azure/azure-sdk-for-sap-odata.git`
-- Feed your OData metadata to the generator:
+- Feed your OData metadata to the supplied generator. Learn more about the generator [here](DataOperations.Generator.OData/README.md)
 
 ### For Windows
 
@@ -66,7 +63,7 @@ cd /Generator/publishout
 
 - Enjoy the Microsoft + SAP ASCII chart and find the .NET SDK for your OData service in your specified folder `C:\SDK`.
 - Get started with provided Function App sample in `C:\SDK\Samples\FunctionsSample.GWSAMPLE_BASIC`.
-- Maintain respective [`local.settings.json`](/Samples/FunctionsSample.GWSAMPLE_BASIC/local.settings_sample.json) with your SAP OData service setup and credentials. Have a look at the provided sample file local.settings_sample.json.
+- Maintain respective [`local.settings.json`](/Samples/FunctionsSample.GWSAMPLE_BASIC/local.settings_sample.json) with your SAP OData service setup and credentials. Have a look at the provided sample file 'local.settings_sample.json'.
 - Open the solution in Visual Studio or Visual Studio Code.
 - Execute `func host start` and start coding😎👌🔥
 - Call `http://localhost:7071/api/Products/10` to see the generated OData service in action listing the first 10 products.
