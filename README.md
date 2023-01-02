@@ -17,7 +17,7 @@ Currently supported output language is C#. You may extend by adding templates fo
 ## Prerequisites 👨🏾‍🎓
 
 - [Azure Subscription](https://azure.microsoft.com/free/)
-- Local Development setup with [Dotnet 6](https://dotnet.microsoft.com/download/dotnet/6.0) and [Azure Functions Core tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) or [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335)
+- Local Development setup with [Dotnet 6](https://dotnet.microsoft.com/download/dotnet/6.0) and [Azure Functions Core tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) or [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335) to hit the ground running without any further need for setup.
 - Any OData Service (for example [SAP Mock Server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html), [SAP Demo Gateway (OData Catalog Service)](https://sapes5.sapdevcenter.com/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/), [S/4HANA Cloud](https://api.sap.com/products/SAPS4HANACloud/apis/ODATAV4), [SAP API Business Hub](https://api.sap.com/), [SAP SuccessFactors](https://api.sap.com/products/SAPSuccessFactors/apis/ODATA), S/4HANA Fully-Activated appliance from [SAP CAL](https://cal.sap.com/), your own in-house SAP system, etc.)
 
 > **Note**
