@@ -93,7 +93,7 @@ Have a look at the [SAPBindingDemo.cs](Samples/FunctionsSample.GWSAMPLE_BASIC/SA
 There are multiple ways to deploy this project to Azure. We provide two options in this repository:
 
 1. via template deployment and VS Code extension - more information is available [here](documentation/DEPLOYMENT-VSCODE.md)
-2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`  - more information is available here soon
+2. via [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/overview) using `azd up`  - more information is available here soon and tracked in [Issue 1](https://github.com/Azure/azure-sdk-for-sap-odata/issues/1)
 
 ## Understand your generated SDK structure🫀
 
