@@ -8,11 +8,11 @@ Marshalling the OData semantics into the SDK **reduces initial integration effor
 
 Currently supported output language is C#. You may extend by adding templates for other languages [here](DataOperations.Generator.OData/Templates). Consumers of the SDK can be coded in any language.
 
-> **Note** - due to the nature of the SDK it can be applied to apps or functions coded in NodeJS too.
+> **Note** - Due to the nature of the SDK it can be applied to apps or functions coded in NodeJS too.
 
 ![Illustration of the function app flow with the OData SDK](/assets/img/function-app-overview.png)
 
-> **Note** - in case you prefer SAP's own Cloud SDK for your Azure app development, have a look at [this sister project](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) deploying to Azure App Service.
+> **Note** - In case you prefer SAP's own Cloud SDK for your Azure app development, have a look at [this sister project](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) deploying to Azure App Service.
 
 ## Prerequisites 👨🏾‍🎓
 
@@ -20,11 +20,9 @@ Currently supported output language is C#. You may extend by adding templates fo
 - Local Development setup with [Dotnet 6](https://dotnet.microsoft.com/download/dotnet/6.0) and [Azure Functions Core tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash) or [![GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335) to hit the ground running without any further need for setup.
 - Any OData Service (for example [SAP Mock Server](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html), [SAP Demo Gateway (OData Catalog Service)](https://sapes5.sapdevcenter.com/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/), [S/4HANA Cloud](https://api.sap.com/products/SAPS4HANACloud/apis/ODATAV4), [SAP API Business Hub](https://api.sap.com/), [SAP SuccessFactors](https://api.sap.com/products/SAPSuccessFactors/apis/ODATA), S/4HANA Fully-Activated appliance from [SAP CAL](https://cal.sap.com/), your own in-house SAP system, etc.)
 
-> **Note**
-> The SAP mock server is a separate project and **not** part of this repo. You can find the mock server [here](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html).
+> **Note** - The SAP mock server is a separate project and **not** part of this repo. You can find the mock server [here](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html).
 
-> **Note**
-> You can use the [SAP API Business Hub](https://api.sap.com/) to get a free trial of SAP OData services or leverage the public demo system ES5. Find the GWSAMPLE_BASIC demo service on ES5 [here](https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata). See SAP's [blog post](https://blogs.sap.com/2017/12/05/new-sap-gateway-demo-system-available/) about ES5 for more details and how to request a user.
+> **Note** - You can use the [SAP API Business Hub](https://api.sap.com/) to get a free trial of SAP OData services or leverage the public demo system ES5. Find the GWSAMPLE_BASIC demo service on ES5 [here](https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata). See SAP's [blog post](https://blogs.sap.com/2017/12/05/new-sap-gateway-demo-system-available/) about ES5 for more details and how to request a user.
 
 ## Getting Started 🚀
 
@@ -66,16 +64,17 @@ cd /Generator/publishout
 - Maintain respective [`local.settings.json`](/Samples/FunctionsSample.GWSAMPLE_BASIC/local.settings_sample.json) with your SAP OData service setup and credentials. Have a look at the provided sample file 'local.settings_sample.json'.
 - Open the solution in Visual Studio or Visual Studio Code.
 - Execute `func host start` and start coding😎👌🔥
+
+  > **Note** - In case the `func host start` shows the error `error NU1100: Unable to resolve ...` execute the command `dotnet restore` and then redo the `func host start`.
+
 - Call `http://localhost:7071/api/Products/10` to see the generated OData service in action listing the first 10 products.
 - Use provided [call library](Samples/FunctionsSample.GWSAMPLE_BASIC/odata-product-sample.http) with [VS Code REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) for convenience.
 
-> **Note**
-> Adjust to `https://your-gh-domain.preview.app.github.dev/api/Products/10` for Codespaces.
+> **Note** - Adjust to `https://your-gh-domain.preview.app.github.dev/api/Products/10` for Codespaces.
 
 Learn more about the local Azure Functions start commands per project language [here](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash#start).
 
-> **Note**
-> Use the [TestClient sample](/Samples/TestClientSample.GWSAMPLE_BASIC/) for local execution without Azure Functions environment in case you are looking for a generic implementation.
+> **Note** - Use the [TestClient sample](/Samples/TestClientSample.GWSAMPLE_BASIC/) for local execution without Azure Functions environment in case you are looking for a generic implementation.
 
 ### How to use with Azure Functions <⚡>
 
@@ -85,8 +84,7 @@ Have a look at the [SAPBindingDemo.cs](Samples/FunctionsSample.GWSAMPLE_BASIC/SA
 - **SAP Input Binding**: enables complex pre-flight requests for SAP business objects and functions served by the OData service setting the scene for the actual request. This simplifies the request structure and puts focus on the business logic.
 - **SAP Output Binding**: enables complex post-processing of the SAP business object altered in the function, marshalling the required OData call to finish the request.
 
-> **Note**
-> The described approach in this repos is applicable to other Azure PaaS offerings like Azure App Service. See the [Azure App Service SAP Cloud SDK quickstart for JavaScript](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) for reference.
+> **Note** - The described approach in this repos is applicable to other Azure PaaS offerings like Azure App Service. See the [Azure App Service SAP Cloud SDK quickstart for JavaScript](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) for reference.
 
 ## Deploy to Azure🪂
 
