@@ -54,9 +54,11 @@ chmod -R 777 /workspaces/Generator/publishout
 
 ```bash
 cd azure-sdk-for-sap-odata/BinaryDownloads
-unzip DataOperations.Generator.OData_osx-x64.zip -d /Generator
-cd /Generator/publishout
-./DataOperations.Generator.OData --inputfile /Generator/publishout/metadata.xml --outputfolder /SDK --templatefolder /Generator/publishout/Templates --samples true
+unzip DataOperations.Generator.OData_osx-x64.zip -d /workspaces/Generator
+cd /workspaces/Generator/publishout
+chmod +x DataOperations.Generator.OData
+chmod -R 777 /workspaces/Generator/publishout
+./DataOperations.Generator.OData --inputfile /workspaces/Generator/publishout/metadata.xml --outputfolder /workspaces/SDK --templatefolder /workspaces/Generator/publishout/Templates --samples true
 ```
 
 - Enjoy the Microsoft + SAP ASCII chart and find the .NET SDK for your OData service in your specified folder `C:\SDK`.
