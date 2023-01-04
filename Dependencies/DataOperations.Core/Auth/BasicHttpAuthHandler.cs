@@ -8,8 +8,8 @@ namespace DataOperations.Core.Auth.Http
         public BasicHttpAuthHandler(IOptions<BasicHttpAuthHandlerOptions> options)
         {
             _options = options.Value;
-            Console.WriteLine("UserName: {0}", _options.UserName);
-            Console.WriteLine("Password: {0}", _options.Password);
+            Console.WriteLine("UserName set");
+            Console.WriteLine("Password set");
         }
         public IOptions<BasicHttpAuthHandlerOptions> Options { get; }
         public async ValueTask<string> GetAuthStringAsync(string scope ="ALL")
