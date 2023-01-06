@@ -65,6 +65,8 @@ chmod -R 777 /workspaces/Generator/publishout
 - Get started with provided Function App sample in `C:\SDK\Samples\FunctionsSample.GWSAMPLE_BASIC`.
 - Maintain respective [`local.settings.json`](/Samples/FunctionsSample.GWSAMPLE_BASIC/local.settings_sample.json) with your SAP OData service setup and credentials. Have a look at the provided sample file 'local.settings_sample.json'.
 - Open the solution in Visual Studio or Visual Studio Code.
+- `cd C:\SDK` making sure the Dependencies and GWSAMPLE_BASIC folder are present and compiled.
+- `cd .\Samples\FunctionsSample.GWSAMPLE_BASIC\`
 - Execute `func host start` and start coding😎👌🔥
 
   > **Note** - In case the `func host start` shows the error `error NU1100: Unable to resolve ...` execute the command `dotnet restore` and then redo the `func host start`.
