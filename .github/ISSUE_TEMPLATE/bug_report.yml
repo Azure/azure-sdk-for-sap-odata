@@ -15,11 +15,11 @@ body:
     attributes:
       label: What type of issue are you facing
       description: What type of issue are you facing?
+      required: true
       options:
         - label: bug report
         - label: documentation issue or request
         - label: regression (a behavior that used to work and stopped in a new version)
-          required: true
   - type: textarea
     attributes:
       label: Describe the bug
