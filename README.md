@@ -1,4 +1,4 @@
-# Azure SDK for SAP OData 🚀
+# Azure SDK for SAP OData 🚀 (PREVIEW)
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=578517335)[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-sap-odata%2Fmain%2Fbuildandpublish%2Fazuredeploy.json)
 
