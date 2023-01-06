@@ -1,6 +1,6 @@
 # Understand your generated SDK structure🫀
 
-The Azure SDK for SAP OData requires class objects to make calls to OData services and receive typed responses. The generator takes care of that process building the foundation for the deployment to Azure.
+The Azure SDK for SAP OData requires class objects to make calls to OData services and receive typed responses. The generator takes care of that process building the foundation for the deployment to Azure. The generation schemas are built upon the deliverables by the [OASIS foundation](https://github.com/oasis-tcs/OData-openapi) standardizing OData.
 
 ![Illustration of the process flow for the C# SDK generation](/assets/img/generator-flow.gif)
 [penguin gif source](https://tenor.com/view/happy-dance-baby-penguin-cute-gif-13901365)
