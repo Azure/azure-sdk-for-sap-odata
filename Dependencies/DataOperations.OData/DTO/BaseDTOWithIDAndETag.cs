@@ -9,7 +9,7 @@ namespace DataOperations.OData
         public void AttachDispatcher<T>(IOperationsDispatcher dispatcher) where T : IBaseDTOWithIDAndETag
         {
             this.dispatcher = dispatcher;
-            Console.WriteLine("Attached dispatcher to " + this.GetType().Name); 
+            // Console.WriteLine("Attached dispatcher to " + this.GetType().Name); 
 
             // Get instances of all properties that are of type DeferredReference<T> using reflection
             // We have to attach a reference to the dispatcher to each of these properties so that they can fetch the data from the server
@@ -40,7 +40,7 @@ namespace DataOperations.OData
                     .First()
                     .SetValue(def, dispatcher);
                     
-                Console.WriteLine("Attached dispatcher to Deferred " + deferredReference.Name);
+                // Console.WriteLine("Attached dispatcher to Deferred " + deferredReference.Name);
             }
 
             // Now do the same for the DeferredEnumerable<T> properties

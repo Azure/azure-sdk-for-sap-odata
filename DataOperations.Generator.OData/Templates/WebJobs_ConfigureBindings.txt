@@ -2,4 +2,5 @@
         
         public static void ConfigureBindings(ExtensionConfigContext context, IOperationsDispatcher dispatcher)
         {
-            
+            IQuerySetOperationsFactory esops = new ODataEntitySetOperationsFactory(dispatcher);
+        

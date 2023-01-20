@@ -6,7 +6,7 @@ namespace DataOperations.Bindings
         public static void BindToCollector<T,K>(this ExtensionConfigContext context, IOperationsDispatcher dispatcher) where T: Attribute, IOutputAttribute where K: IBaseDTOWithIDAndETag 
         {
             context.AddBindingRule<T>().BindToCollector<K>((x) => new BaseDTOAsyncCollector<K>(dispatcher));
-            Console.WriteLine("Bound to Collector" + typeof(K).FullName);
+            // Console.WriteLine("Bound to Collector" + typeof(K).FullName);
         }
         public static void BindToInput<T,K>(this ExtensionConfigContext context, Func<T, K> execThis) where T: Attribute, IInputAttribute where K: IBaseDTOWithIDAndETag 
         {
