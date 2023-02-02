@@ -6,3 +6,8 @@ x-ms-token-aad-access-token: your-access-token-if-any
 
 GET http://localhost:7071/api/SalesOrderPriceUpdate/0500000000/10 HTTP/1.1
 content-type: application/json
+
+###
+
+GET http://localhost:7071/api/GetDeliveryAddressLabel/0500000000 HTTP/1.1
+content-type: text/html

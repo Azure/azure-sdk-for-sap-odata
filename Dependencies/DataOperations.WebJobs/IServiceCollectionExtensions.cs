@@ -27,7 +27,7 @@ namespace DataOperations.WebJobs
         {
             Type typ = typeof(BaseDTOAsyncCollector<>).MakeGenericType(x.GetType());
             services.AddSingleton(typ);
-            Console.WriteLine("Registered Singleton for Binding" + typ.FullName);
+            // Console.WriteLine("Registered Singleton for Binding" + typ.FullName);
         }
     }
 }

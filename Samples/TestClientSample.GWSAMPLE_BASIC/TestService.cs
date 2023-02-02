@@ -12,14 +12,15 @@ namespace GWSAMPLE_BASIC
         private readonly IOperationsDispatcher _dispatcher;
         public BusinessPartnerSet bps;
         public ProductSet ps;
-        public SalesOrderLineItemSet sos;
+        public SalesOrderSet sos;
+        public SalesOrderLineItemSet sols;
 
-        public TestService(ILogger<TestService> logger, IOperationsDispatcher dispatcher, SalesOrderSet _sos, ProductSet _ps, BusinessPartnerSet _bps
-        )
+        public TestService(ILogger<TestService> logger, IOperationsDispatcher dispatcher, SalesOrderSet _sos, SalesOrderLineItemSet _sols, ProductSet _ps, BusinessPartnerSet _bps)
         {
             _logger = logger;
             _dispatcher = dispatcher;
             this.sos = _sos;
+            this.sols = _sols;
             this.ps = _ps;
             this.bps = _bps;
         }
@@ -28,6 +29,10 @@ namespace GWSAMPLE_BASIC
 
             _logger.LogInformation("Test is starting...");
 
+            // get me a sales order line item with id 0500000000 and pull the city asynchronously from the business partner
+            var salesOrderInput = await sos.GetAsync("0500000000");
+            _logger.LogInformation((await salesOrderInput.ToBusinessPartner.GetAsync()).Address.City);
+        
             // get product 'ht-1023'
             var product = await ps.GetAsync("HT-1023");
 
@@ -46,9 +51,10 @@ namespace GWSAMPLE_BASIC
             var selectors = new Dictionary<string, object>();
             selectors.Add("SalesOrderID", "0500000000");
             selectors.Add("ItemPosition", "0000000010");
-            var salesOrderLineItem = await sos.GetAsync(selectors);
+
+            var salesOrderLineItem = await sols.GetAsync(selectors);
             salesOrderLineItem.Note = "Test Note";
-            await sos.UpdateAsync(salesOrderLineItem);
+            await sols.UpdateAsync(salesOrderLineItem);
 
             Product pro = await ps.GetAsync("HT-1023");
             if(pro.ProductID != "HT-1023") throw new Exception("Failed GET");

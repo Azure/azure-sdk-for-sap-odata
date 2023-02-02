@@ -1,1 +1,1 @@
-            context.BindToInput<Input_{{NameSpace}}_{{ClassName}}Attribute, {{ClassName}}>((x) => dispatcher.GetAsync<{{ClassName}}>(x.{{KeyField}}).Result);
+            context.BindToInput<Input_{{NameSpace}}_{{ClassName}}Attribute, {{ClassName}}>((x) => esops.Create<{{ClassName}}>().GetAsync(x.{{KeyField}}).Result);
