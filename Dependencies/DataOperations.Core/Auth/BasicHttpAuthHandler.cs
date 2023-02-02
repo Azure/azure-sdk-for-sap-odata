@@ -19,7 +19,13 @@ namespace DataOperations.Core.Auth.Http
         public IOptions<BasicHttpAuthHandlerOptions> Options { get; }
         public async ValueTask<string> GetAuthStringAsync(string scope ="ALL")
         {
-            return $"Basic {Convert.ToBase64String(Encoding.ASCII.GetBytes($"{_options.UserName}:{_options.Password}"))}";
+            string authString = "";
+            if(!String.IsNullOrEmpty(_options.UserName) && !String.IsNullOrEmpty(_options.Password))
+            {
+                authString = $"Basic {Convert.ToBase64String(Encoding.ASCII.GetBytes($"{_options.UserName}:{_options.Password}"))}";
+            }
+            
+            return authString;
         }
     }
 }

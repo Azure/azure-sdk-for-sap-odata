@@ -17,6 +17,7 @@ namespace FunctionsDemo
             // Register the SDK and dependencies for use in the SDK sample service
             builder.Services
                 .RegisterBasicHttpAuthHandler(config)                // Code is in Dependencies\DataOperations.Core\IServiceCollectionExtensions.cs, Registers the BasicHttpAuthHandler for use in the SDK sample service, or whichever auth handler you need
+                .RegisterAPIKeyAuthHandler(config)                   // Code is in Dependencies\DataOperations.Core\IServiceCollectionExtensions.cs, Registers the APIKeyAuthHandler for use in the SDK sample service, or whichever auth handler you need
                 .RegisterODataServices(config)                       // Code is in Dependencies\DataOperations.OData\IServiceCollectionExtensions.cs, registers the OData Client Classes
                 .RegisterSetsAsSingletons()                          // Generated in the Data.GWSAMPLE_BASIC project, registers the poco classes as singletons
                 .ConfigureAndRegisterBindingsInAllAssemblies()      // Uses reflection to go and locate the function bindings for the poco classes to enable the SDK in function bindings

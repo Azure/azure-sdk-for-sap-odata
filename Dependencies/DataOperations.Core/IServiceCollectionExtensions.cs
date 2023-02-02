@@ -13,5 +13,13 @@ namespace DataOperations.Core
                 .AddSingleton<DataOperations.Core.Auth.IAuthHandler, BasicHttpAuthHandler>()
             ;
         }
+
+        public static IServiceCollection RegisterAPIKeyAuthHandler(this IServiceCollection services, IConfiguration config)
+        {
+            return services
+                .Configure<APIKeyAuthHandlerOptions>(config.GetSection("APIKeyAuthHandler"))
+                .AddSingleton<DataOperations.Core.Auth.IAuthHandler, APIKeyAuthHandler>()
+            ;
+        }
     }
 }
