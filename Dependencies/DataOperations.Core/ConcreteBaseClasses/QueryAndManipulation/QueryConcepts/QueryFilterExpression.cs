@@ -116,11 +116,17 @@ namespace DataOperations
                 {
                     FilterConjunctionOperator con = item.Key;
                     List<QueryFilterExpression> children = item.Value;
+                    //get last child in the list
+                    QueryFilterExpression lastChild = children.Last();
+                    
                     foreach (var child in children)
                     {    
                         bool quoted = true; string quote = quoted ? "'" : "";
                         string conj = (con != FilterConjunctionOperator.root) ? con.ToString() : "";
-                        filterClause += $"{child.RenderOutputAsFilterClauseRecurse()} {conj} ";
+                        if(child == lastChild)
+                            filterClause += $"{child.RenderOutputAsFilterClauseRecurse()}";
+                        else
+                            filterClause += $"{child.RenderOutputAsFilterClauseRecurse()} {conj} ";
                     }
                 }
             }
