@@ -4,23 +4,34 @@ using DataOperations.OData.Deserialization;
 using DataOperations.OData.Serialization;
 using DataOperations.Core.Auth;
 using Microsoft.Extensions.Options;
+using DataOperations.Core.Auth.Http;
 
 namespace DataOperations.OData.Client
 {
     public class ODataHttpClientContext : IClientContext
     {
         private IHttpClientFactory _clientFactory;
-        private readonly IAuthHandler _authHandler;
+        private readonly BasicHttpAuthHandler _userAuthHandler;
+        private readonly APIKeyAuthHandler _apiAuthHandler;
         private readonly ODataHttpClientContextOptions _Options;
 
 
         // Instantiate the client as a context class 
         // We'll need an HtpClientFactory with an already defined base address and token callback
         // We'll also need a callback to fetch a JWT based on the URL and or the object type or method
-        public ODataHttpClientContext(IHttpClientFactory clientFactory, IAuthHandler authHandler, IOptions<ODataHttpClientContextOptions> options)
+        public ODataHttpClientContext(IHttpClientFactory clientFactory, IEnumerable<IAuthHandler> authHandlers, IOptions<ODataHttpClientContextOptions> options)
         {
             _clientFactory = clientFactory;
-            this._authHandler = authHandler;
+            
+            foreach(var authHandler in authHandlers){
+                if(authHandler is BasicHttpAuthHandler){
+                    this._userAuthHandler = (BasicHttpAuthHandler)authHandler;
+                }
+                if(authHandler is APIKeyAuthHandler){
+                    this._apiAuthHandler = (APIKeyAuthHandler)authHandler;
+                }
+            }
+            
             this._Options = options.Value;
         }
         public virtual async ValueTask<V> FireRemoteRequestAsync<T, V>(T Payload, string tailUri = "/", HttpMethod method = null, Dictionary<string, object> KeyParams = null,Dictionary<string,string> CustomHeaders = null)
@@ -101,8 +112,22 @@ namespace DataOperations.OData.Client
             }
 
             var _requestMessage = new HttpRequestMessage(method ?? HttpMethod.Get, tailUri);
-                       
-            _requestMessage.Headers.Add("Authorization", $"{await _authHandler.GetAuthStringAsync("ALL")}");
+
+            if(_apiAuthHandler != null)
+            {
+                //in case API key provided add with defined header name. Azure APIM uses 'Ocp-Apim-Subscription-Key' and SAP APIM uses 'APIKey'
+                _requestMessage.Headers.Add($"{await _apiAuthHandler.GetKeyHeaderNameAsync()}", $"{await _apiAuthHandler.GetAuthStringAsync("ALL")}");
+                //tracing flag opinionated towards Azure APIM
+                _requestMessage.Headers.Add("Ocp-Apim-Trace", $"{await _apiAuthHandler.GetTraceActiveAsync()}");
+            }
+            
+            //only add basic auth header if BASIC credentials are maintained
+            string basicAuthToken = await _userAuthHandler.GetAuthStringAsync("ALL");
+            if(!String.IsNullOrEmpty(basicAuthToken))
+            {
+                _requestMessage.Headers.Add("Authorization", basicAuthToken);
+            }
+
             _requestMessage.Headers.Add("Accept", "application/json");
 
             if(etag != "")

@@ -17,6 +17,7 @@ namespace GWSAMPLE_BASIC
                 // Register the SDK and dependencies for use in the SDK sample service
                 services
                     .RegisterBasicHttpAuthHandler(context.Configuration) // Register the BasicHttpAuthHandler for use in the SDK sample service, or whichever auth handler you need
+                    .RegisterAPIKeyAuthHandler(context.Configuration)    // Register the APIKeyAuthHandler for use in the SDK sample service, or whichever auth handler you need
                     .RegisterODataServices(context.Configuration)        // Code is in Dependencies\DataOperations.OData\IServiceCollectionExtensions.cs, registers the OData Client Classes
                     .AddSingleton<DataOperations.IOperationsDispatcher, ODataOperationsDispatcher>()
                     .RegisterSetsAsSingletons()                          // Generated in the Data.GWSAMPLE_BASIC project, registers the poco classes as singletons
