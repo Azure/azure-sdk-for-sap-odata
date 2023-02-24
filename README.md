@@ -103,6 +103,18 @@ You get two folders in your output folder. One containing the helper classes alw
 
 Learn more about the generated SDK structure [here](/DataOperations.Generator.OData/README.md).
 
+## [Advanced] Modify the SDK / then build from source and generate your own SDK generator
+You can modify the SDK or outputs and dependencies to add new features and functions then generate and publish your own binaries folder.
+To fire the generation, you can use the same build scripts that we do, just follow the steps here.
+
+> Note: You will need a windows machines or container ready 
+
+1. Open a command line terminal
+2. Clone the repository.
+3. Cd into the root of the cloned folder 
+4. Create another folder to contain the output (outside of the repo folder)
+5. Run the master build script to trigger the build, using the full path to the created output folder by running buildandpublish\publishme.cmd <Full Folder Path without a trailing backslash>
+
 ## What's next?
 
 You can do a lot more once the app is deployed. Curious? We go you covered with some more information [here](documentation/WHATS-NEXT.md)
