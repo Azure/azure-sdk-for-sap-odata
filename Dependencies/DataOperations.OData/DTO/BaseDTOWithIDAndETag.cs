@@ -216,5 +216,6 @@ namespace DataOperations.OData
             // Return the value that was reverted from (i.e. the undone value)
             return revertedFromValue;
         }
+
     }
 }

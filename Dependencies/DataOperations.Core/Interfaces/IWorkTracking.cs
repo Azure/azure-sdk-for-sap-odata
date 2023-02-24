@@ -10,8 +10,8 @@ public interface IWorkTracking : INotifyPropertyChanged
     bool IsChanged {get;}
     void RevertChanges();
     void AcceptChanges(); 
-    void UndoLastChange();
-    void UndoLastChange(string PropertyName);
+    object UndoLastChange();
+    object UndoLastChange(string PropertyName);
 
     Dictionary<string, object> GetChangeLog();
     string GetChangeLogAsJSON();
