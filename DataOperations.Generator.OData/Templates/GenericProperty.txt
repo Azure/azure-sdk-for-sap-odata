@@ -1,1 +1,10 @@
-        public {{TypeName}} {{PropName}} { get; set; }
+        private {{TypeName}} _{{PropName}};
+        public {{TypeName}} {{PropName}} { get; 
+                set 
+                {
+                        if (_{{PropName}} == value) return; 
+                        {{TypeName}} temp = _{{PropName}};
+                        _{{PropName}} = value;
+                        NotifyPropertyChanged(_{{PropName}}, temp, value); 
+                } 
+        }

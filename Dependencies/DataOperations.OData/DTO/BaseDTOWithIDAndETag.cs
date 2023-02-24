@@ -1,9 +1,11 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using DataOperations.OData.Serialization;
 
 namespace DataOperations.OData
 {
-    public abstract class BaseDTOWithIDAndETag : IBaseDTOWithIDAndETag
+    public abstract class BaseDTOWithIDAndETag : IBaseDTOWithIDAndETag, IWorkTracking
     {
         private IOperationsDispatcher dispatcher {get; set;}
         public void AttachDispatcher<T>(IOperationsDispatcher dispatcher) where T : IBaseDTOWithIDAndETag
@@ -93,12 +95,17 @@ namespace DataOperations.OData
         {
             return GetReferenceValues("PrimaryKey").Select(e => e.Key);
         }
+
         [JsonIgnore()]
-        public string eTag { get; set; } = ""; 
+        public string eTag { get; set; } = "";
+
+
+
         public virtual List<string> GetReferenceKeys(string ReferenceName)
         {
             return ReferenceKeys[ReferenceName];
         }
+
         public virtual Dictionary<string, object> GetReferenceValues(string ReferenceName)
         {
             var _ = new Dictionary<string, object>();
@@ -119,6 +126,62 @@ namespace DataOperations.OData
                 }
             }
             return _;
+        }
+
+        private Dictionary<string, object> _ChangeLog = new Dictionary<string, object>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // This method is called by the Set accessor of each property.  
+        protected internal void NotifyPropertyChanged<T>(T oldVal, T newVal, string PropertyName)  
+        {  
+            // Add it to the change log if we are not reverting changes
+            if (!_IsRevertingChanges)
+            {
+                _ChangeLog.Add(PropertyName, oldVal);
+            }
+            // We still want to fire INotifyPropertyChanged so that the UI can update even if we are reverting changes
+            PropertyChanged?.Invoke(this, new PropertyChangedWithValuesEventArgs<T>(PropertyName, oldVal, newVal));
+        }  
+
+        // Key is the property name that changed, value is the old value 
+        // (The current value will be reflected in the present value of the property!)
+        public Dictionary<string, object> GetChangeLog()
+        {
+            return _ChangeLog;
+        }
+        public string GetChangeLogAsJSON()
+        {
+            return System.Text.Json.JsonSerializer.Serialize<Dictionary<string,object>>(_ChangeLog);
+        }
+        // This will just nuke the change log
+        public void AcceptChanges()
+        {
+            _ChangeLog = new Dictionary<string, object>();
+        }
+
+        bool IWorkTracking.IsChanged => _ChangeLog.Count > 0;
+
+        private bool _IsRevertingChanges = false;
+
+        public void RevertChanges()
+        {
+            // set a flag to temporarily halt change tracking from adding changes back to the change log 
+            // (we don't want to add the changes we are about to make back to the change log)
+            _IsRevertingChanges = true;
+
+            // Use reflection to fetch the old values from the table and set them back one by one then clear the change log;
+            foreach(var change in _ChangeLog)
+            {
+                this.GetType().GetProperty(change.Key).SetValue(this, change.Value);
+            }
+
+            // Clear the change log
+            ClearChangeLog();
+
+            // unset the flag
+            _IsRevertingChanges = false;
+
         }
     }
 }
