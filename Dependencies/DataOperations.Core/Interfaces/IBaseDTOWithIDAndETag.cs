@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DataOperations
 {
-    public interface IBaseDTOWithIDAndETag
+    public interface IBaseDTOWithIDAndETag : INotifyPropertyChanged, IWorkTracking
     {
         string eTag { get; set; }
         IEnumerable<string> GetPrimaryKey();
