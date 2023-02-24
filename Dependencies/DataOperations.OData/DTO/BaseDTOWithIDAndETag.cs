@@ -26,8 +26,7 @@ namespace DataOperations.OData
                 // Get the deferred property setter
                 var def = deferredReference.GetMethod.Invoke(this, null);
 
-                // Create the instance of the deferred enum property 
-                // if it is null, then create a new instance of the deferred property.
+                // Create the instance of the deferred enum property, if it is null, then create a new instance of the deferred property.
                 // otherwise after deserialization it will be null, which is bad :(
 
                 def.GetType()
@@ -99,8 +98,6 @@ namespace DataOperations.OData
         [JsonIgnore()]
         public string eTag { get; set; } = "";
 
-
-
         public virtual List<string> GetReferenceKeys(string ReferenceName)
         {
             return ReferenceKeys[ReferenceName];
@@ -109,7 +106,6 @@ namespace DataOperations.OData
         public virtual Dictionary<string, object> GetReferenceValues(string ReferenceName)
         {
             var _ = new Dictionary<string, object>();
-
             foreach(string tup in GetReferenceKeys(ReferenceName))
             {
                 if(tup.Contains("|"))
@@ -150,10 +146,12 @@ namespace DataOperations.OData
         {
             return _ChangeLog;
         }
+
         public string GetChangeLogAsJSON()
         {
             return System.Text.Json.JsonSerializer.Serialize<Dictionary<string,object>>(_ChangeLog);
         }
+
         // This will just nuke the change log
         public void AcceptChanges()
         {
@@ -161,7 +159,6 @@ namespace DataOperations.OData
         }
 
         bool IWorkTracking.IsChanged => _ChangeLog.Count > 0;
-
         private bool _IsRevertingChanges = false;
 
         public void RevertChanges()
@@ -175,6 +172,8 @@ namespace DataOperations.OData
             {
                 this.GetType().GetProperty(change.Key).SetValue(this, change.Value);
             }
+
+            _ChangeLog = new Dictionary<string, object>();
 
             // unset the flag
             _IsRevertingChanges = false;
@@ -205,7 +204,7 @@ namespace DataOperations.OData
             // (we don't want to add the changes we are about to make back to the change log)
             _IsRevertingChanges = true;
 
-            // Use reflection to fetch the old value from the table and set it then clear the change log entry;
+            // Use reflection to fetch the old value for this property from the table and set it then clear the change log entry;
             KeyValuePair<string, object> lastValue = _ChangeLog.Where(e => e.Key == PropertyName).FirstOrDefault();
             object revertedFromValue = this.GetType().GetProperty(lastValue.Key).GetValue(this);
             this.GetType().GetProperty(lastValue.Key).SetValue(this, lastValue.Value);
@@ -216,6 +215,5 @@ namespace DataOperations.OData
             // Return the value that was reverted from (i.e. the undone value)
             return revertedFromValue;
         }
-
     }
 }

@@ -34,6 +34,7 @@ namespace DataOperations.OData.Client
             
             this._Options = options.Value;
         }
+
         public virtual async ValueTask<V> FireRemoteRequestAsync<T, V>(T Payload, string tailUri = "/", HttpMethod method = null, Dictionary<string, object> KeyParams = null,Dictionary<string,string> CustomHeaders = null)
         where T : IBaseDTOWithIDAndETag where V : IBaseDTOWithIDAndETag  
         {
@@ -80,19 +81,19 @@ namespace DataOperations.OData.Client
             HttpResponseMessage _resp = await ExecuteHttpRequest(await BuildHttpRequestMessageAsync("",  new Uri(tailUri).PathAndQuery, method));
             return (await DeserializeAsyncResponse<RootList<T>>(_resp)).d.results; 
         }
-        private static string NullWrapSerializePayload<T>(T Payload)
+        private static string NullWrapSerializePayload<T>(T Payload, bool ChangesOnly = false) where T : IBaseDTOWithIDAndETag
         {
             string SPayload = "";
-            if (Payload != null) SPayload = SerializePayload(Payload);
+            if (Payload != null) SPayload = SerializePayload(Payload, ChangesOnly);
             return SPayload;
         }
         private static async Task<T> DeserializeAsyncResponse<T>(HttpResponseMessage _resp)
         {
             JsonSerializerOptions jso = GetDeserializerOptions();
 
-            // Should really Asynchronously deserialize an instance of T from the response body.
+            // Should really Asynchronously deserialize an instance of T from the response body here
             // For now we'll just return the response body as a string.
-            // This is a hack to get the debug data whilst in dev mode.
+            // This is a hack to get the debug data whilst in dev mode / preview.
             string debug = await _resp.Content.ReadAsStringAsync();
             T ret = (JsonSerializer.Deserialize<T>(debug, jso));
             return ret;
@@ -154,7 +155,7 @@ namespace DataOperations.OData.Client
 
             return _requestMessage;
         }
-        private static string SerializePayload<T>(T Payload)
+        private static string SerializePayload<T>(T Payload, bool ChangesOnly = false) where T: IBaseDTOWithIDAndETag
         {
             var opt = new JsonSerializerOptions()
             {
@@ -166,10 +167,20 @@ namespace DataOperations.OData.Client
             };
             opt.Converters.Add(new CustomODataByteConverter());
             opt.Converters.Add(new CustomODataDateConverter());
-            // opt.Converters.Add(new DeferredConverter<BaseDTOWithIDAndETag>());
-            // opt.Converters.Add(new DeferredEnumerableConverter<BaseDTOWithIDAndETag>());
-            string output = JsonSerializer.Serialize<T>(Payload,opt);
+
+            string output = ""; 
+            if(!ChangesOnly) 
+            {
+                // This may need some extra formatting here to get the correct output structure that SAP Expects an ODATA PATCH to be in.
+                // For now it's just sending a Dictionary of changes.
+                output = JsonSerializer.Serialize<Dictionary<string,object>>(Payload.GetChangeLog(), opt);
+            }
+            else
+            {
+                output = JsonSerializer.Serialize<T>(Payload, opt);
+            }
             return output;
+
         }
         private async ValueTask<HttpResponseMessage> ExecuteHttpRequest(HttpRequestMessage _requestMessage)
         {
@@ -225,7 +236,19 @@ namespace DataOperations.OData.Client
         public virtual async ValueTask FireRemoteRequestAsyncWithEtagWithNoReturn<T>(T Payload, string tailUri = "/", HttpMethod method = null, 
         Dictionary<string, object> KeyParams = null, Dictionary<string, string> CustomHeaders = null) where T : IBaseDTOWithIDAndETag
         {
-            HttpRequestMessage _requestMessage = await BuildHttpRequestMessageAsync(NullWrapSerializePayload(Payload), tailUri, method, KeyParams, CustomHeaders, Payload.eTag);
+            HttpRequestMessage _requestMessage;
+            // Let's think about if this is a patch request, if so then we only want to send back the changes to the object
+            switch (method?.Method ?? "NULL") 
+            {
+                case "PATCH":
+                    // Set the true flag for SerializePayload to only send the changes to the client 
+                    _requestMessage = await BuildHttpRequestMessageAsync(SerializePayload(Payload, true), tailUri, method, KeyParams, CustomHeaders, Payload.eTag);
+                    break;
+                
+                default: 
+                    _requestMessage = await BuildHttpRequestMessageAsync(NullWrapSerializePayload(Payload), tailUri, method, KeyParams, CustomHeaders, Payload.eTag);
+                    break;
+            }
             HttpResponseMessage _resp = await ExecuteHttpRequest(_requestMessage);
             // If there is no response body, then this is probably an update or create request, so capture the etag
             if (_resp.Headers.Contains("ETag")){
