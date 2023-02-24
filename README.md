@@ -60,7 +60,7 @@ chmod +x DataOperations.Generator.OData
 chmod -R 777 /workspaces/Generator/publishout
 ./DataOperations.Generator.OData --inputfile /workspaces/Generator/publishout/metadata.xml --outputfolder /workspaces/SDK --templatefolder /workspaces/Generator/publishout/Templates --samples true
 ```
-Or below steps to generate SDK for ARM (macOS 13 Ventura) architecture. you can check [macOS runtime identifier](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog#macos-rids) to get target name for different version.
+Or below steps to generate SDK for ARM (macOS 13 Ventura) architecture. you can check [macOS runtime identifier](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog#macos-rids) to get target name for different version, and follow [build from source](https://github.com/felihong/azure-sdk-for-sap-odata#advanced-modify-the-sdk--then-build-from-source-and-generate-your-own-sdk-generator) to build binary files.
 ```bash
 cd azure-sdk-for-sap-odata/BinaryDownloads
 unzip DataOperations.Generator.OData_osx.13-arm64.zip -d /workspaces/Generator
