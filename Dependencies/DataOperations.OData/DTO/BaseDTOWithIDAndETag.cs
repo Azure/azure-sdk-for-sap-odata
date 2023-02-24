@@ -180,5 +180,41 @@ namespace DataOperations.OData
             _IsRevertingChanges = false;
 
         }
+
+        public object UndoLastChange()
+        {
+            // set a flag to temporarily halt change tracking from adding changes back to the change log 
+            // (we don't want to add the changes we are about to make back to the change log)
+            _IsRevertingChanges = true;
+
+            // Use reflection to fetch the old value from the table and set it then clear the change log entry;
+            KeyValuePair<string, object> lastValue = _ChangeLog.Last();
+            object revertedFromValue = this.GetType().GetProperty(lastValue.Key).GetValue(this);
+            this.GetType().GetProperty(lastValue.Key).SetValue(this, lastValue.Value);
+            _ChangeLog.Remove(lastValue.Key);
+
+            // unset the flag
+            _IsRevertingChanges = false;
+            // Return the value that was reverted from (i.e. the undone value)
+            return revertedFromValue;
+        }
+
+        public object UndoLastChange(string PropertyName)
+        {
+            // set a flag to temporarily halt change tracking from adding changes back to the change log 
+            // (we don't want to add the changes we are about to make back to the change log)
+            _IsRevertingChanges = true;
+
+            // Use reflection to fetch the old value from the table and set it then clear the change log entry;
+            KeyValuePair<string, object> lastValue = _ChangeLog.Where(e => e.Key == PropertyName).FirstOrDefault();
+            object revertedFromValue = this.GetType().GetProperty(lastValue.Key).GetValue(this);
+            this.GetType().GetProperty(lastValue.Key).SetValue(this, lastValue.Value);
+            _ChangeLog.Remove(lastValue.Key);
+
+            // unset the flag
+            _IsRevertingChanges = false;
+            // Return the value that was reverted from (i.e. the undone value)
+            return revertedFromValue;
+        }
     }
 }
