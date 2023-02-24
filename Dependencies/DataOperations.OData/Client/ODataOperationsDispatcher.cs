@@ -72,7 +72,7 @@ namespace DataOperations.OData.Client
             {
                 qf1.Add(new QueryFilterExpression(keyValue.Key , FilterOperator.eq, keyValue.Value.ToString()));
             }
-            var args = QueryFilter.FilterFactory(new Dictionary<FilterConjunctionOperator, List<QueryFilterExpression>>(){{FilterConjunctionOperator.root, qf1}});
+            var args = QueryFilter.FilterFactory(new Dictionary<FilterConjunctionOperator, List<QueryFilterExpression>>(){{FilterConjunctionOperator.and, qf1}});
 
             string keyString = $"/{options.ServiceRootPrefix}/{typeof(T).Name}Set" + BuildUriQueryClauses(null,null,null, args, null, null);
             return (await _context.FireRemoteRequestAsyncWithNoPayloadAndEnumerable<T, T>( keyString, HttpMethod.Get, null, null));
