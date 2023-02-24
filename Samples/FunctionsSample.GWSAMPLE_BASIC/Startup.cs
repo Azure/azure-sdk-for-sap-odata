@@ -2,9 +2,9 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using DataOperations.OData;
 using DataOperations.Core;
 using DataOperations.WebJobs;
-using GWSAMPLE_BASIC;
 using Microsoft.Azure.WebJobs;
 using DataOperations.Bindings;
+using GWSAMPLE_BASIC;
 
 [assembly: FunctionsStartup(typeof(FunctionsDemo.Startup))]
 namespace FunctionsDemo

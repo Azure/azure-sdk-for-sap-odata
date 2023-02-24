@@ -113,7 +113,7 @@ To fire the generation, you can use the same build scripts that we do, just foll
 2. Clone the repository.
 3. Cd into the root of the cloned folder 
 4. Create another folder to contain the output (outside of the repo folder)
-5. Run the master build script to trigger the build, using the full path to the created output folder by running buildandpublish\publishme.cmd <Full Folder Path without a trailing backslash>
+5. Run the master build script to trigger the build, using the full path to the created output folder by running publishtobinariesfolder.cmd <Full output Folder Path without a trailing backslash>
 
 ### Example to custom build SDK GENERATOR
 ```cmd 
@@ -126,6 +126,8 @@ C:\Source\azure-sdk-for-sap-odata>buildandpublish\publishme.cmd c:\SAPSDKBuildOu
 ```
 
 Once this is completed, your built outputs should be in the folder C:\SAPSDKBuildOutput\BinaryDownloads for you to follow the above instructions.
+
+Note that the script that the script testbuildsdkandsamples.cmd will build the SDK Generator, extract the windows-x64 binaries and then run the samples to test the SDK Generator works you might find this useful if modifying the SDK or template files.
 
 ## What's next?
 

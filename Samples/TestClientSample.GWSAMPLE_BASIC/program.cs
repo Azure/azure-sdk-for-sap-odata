@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using DataOperations.Core;
 using DataOperations.OData;
 using DataOperations.OData.Client;
-
+using GWSAMPLE_BASIC;
 namespace GWSAMPLE_BASIC
 {
     public partial class Program

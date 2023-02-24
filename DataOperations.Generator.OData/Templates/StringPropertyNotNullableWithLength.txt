@@ -17,7 +17,7 @@
                 {
                     {{TypeName}} temp = _{{PropName}};
                     _{{PropName}} = value;
-                    NotifyPropertyChanged(_{{PropName}}, temp, value); 
+                    NotifyPropertyChanged<string>("{{PropName}}", temp, value); 
                 }
             }
         }

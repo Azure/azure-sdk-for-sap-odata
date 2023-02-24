@@ -1,10 +1,10 @@
         private {{TypeName}} _{{PropName}};
-        public {{TypeName}} {{PropName}} { get; 
-                set 
-                {
+        public {{TypeName}} {{PropName}} { 
+                get {return _{{PropName}};}
+                set {
                         if (_{{PropName}} == value) return; 
                         {{TypeName}} temp = _{{PropName}};
                         _{{PropName}} = value;
-                        NotifyPropertyChanged(_{{PropName}}, temp, value); 
+                        NotifyPropertyChanged<{{TypeName}}>("{{PropName}}", temp, value); 
                 } 
         }
