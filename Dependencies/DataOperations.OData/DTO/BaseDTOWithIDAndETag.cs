@@ -176,9 +176,6 @@ namespace DataOperations.OData
                 this.GetType().GetProperty(change.Key).SetValue(this, change.Value);
             }
 
-            // Clear the change log
-            ClearChangeLog();
-
             // unset the flag
             _IsRevertingChanges = false;
 
