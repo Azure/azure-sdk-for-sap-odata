@@ -5,6 +5,6 @@
                         if (_{{PropName}} == value) return; 
                         {{TypeName}} temp = _{{PropName}};
                         _{{PropName}} = value;
-                        NotifyPropertyChanged<{{TypeName}}>("{{PropName}}", temp, value); 
+                        NotifyPropertyChanged<{{TypeName}}>(temp, value,"{{PropName}}"); 
                 } 
         }

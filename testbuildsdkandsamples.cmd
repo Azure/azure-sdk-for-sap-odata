@@ -20,3 +20,5 @@ cd c:\Source\azure-sdk-for-sap-odata
 REM Now enter your SAP API connection details into the appsettings and local function config files to test the samples
 call code c:\sdk\Samples\ -n
 
+copy c:\SAPExtract\configs\appsettings.json c:\sdk\Samples\TestClientSample.GWSAMPLE_BASIC\appsettings.json
+copy c:\SAPExtract\configs\local.settings.json c:\sdk\Samples\FunctionsSample.GWSAMPLE_BASIC\local.settings.json
