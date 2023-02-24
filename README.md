@@ -103,11 +103,11 @@ You get two folders in your output folder. One containing the helper classes alw
 
 Learn more about the generated SDK structure [here](/DataOperations.Generator.OData/README.md).
 
-## [Advanced] Modify the SDK / then build from source and generate your own SDK generator
+## *Advanced*: Modify the SDK / then build from source and generate your own SDK generator
 You can modify the SDK or outputs and dependencies to add new features and functions then generate and publish your own binaries folder.
 To fire the generation, you can use the same build scripts that we do, just follow the steps here.
 
-> Note: You will need a windows machines or container ready 
+> Note: You will need a Windows machine or container ready to run the generate SDK scripts
 
 1. Open a command line terminal
 2. Clone the repository.
