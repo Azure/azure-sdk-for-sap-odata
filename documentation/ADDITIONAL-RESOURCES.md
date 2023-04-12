@@ -6,7 +6,7 @@ Existing OpenAPI projects are great for generating client libraries for REST API
 
 In case you favor OpenAPI, have a look at below projects instead:
 
-- [Kiota](https://microsoft.github.io/kiota/)
+- [Kiota](https://learn.microsoft.com/openapi/kiota/)
 - [AutoREST](https://github.com/Azure/autorest)
 - [OData to OpenAPI Generator](https://aka.ms/ODataOpenAPI)
 
