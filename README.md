@@ -12,7 +12,7 @@ Currently supported output language is C#. You may extend by adding templates fo
 
 ![Illustration of the function app flow with the OData SDK](/assets/img/function-app-overview.png)
 
-> **Note** - In case you prefer SAP's own Cloud SDK for your Azure app development, have a look at [this sister project](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) deploying to Azure App Service.
+> **Note** - In case you prefer SAP's own Cloud SDK for your Azure app development, have a look at [this sister project](https://github.com/Azure-Samples/app-service-javascript-sap-cloud-sdk-quickstart) deploying to Azure App Service and Azure Functions.
 
 ## Prerequisites 👨🏾‍🎓
 
