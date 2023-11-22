@@ -19,6 +19,6 @@ jobs:
               uses: lycheeverse/lychee-action@v1.8.0
               with:
                 fail: true
-                args: --verbose --no-progress --exclude-mail --exclude-loopback --exclude https://sapes5.sapdevcenter.com .
+                args: --verbose --no-progress --exclude-mail --exclude-loopback --exclude sapes5.sapdevcenter.com --exclude portal.azure.com
               env:
                 GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
