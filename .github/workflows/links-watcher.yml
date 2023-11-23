@@ -18,7 +18,14 @@ jobs:
               id: lychee
               uses: lycheeverse/lychee-action@v1.8.0
               with:
-                fail: true
-                args: --verbose --no-progress --exclude-mail --exclude-loopback --exclude sapes5.sapdevcenter.com --exclude portal.azure.com
+                args: --verbose --no-progress --max-concurrency 2 --exclude-mail --exclude-loopback --exclude sapes5.sapdevcenter.com --exclude portal.azure.com
+                output: ./lychee/out.md
               env:
                 GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+            - name: Create issue if error
+              uses: peter-evans/create-issue-from-file@v4
+              if: ${{ steps.lychee.outputs.exit_code }} != 0
+              with:
+                title: Link Checker Report
+                content-filepath: ./lychee/out.md
+                labels: broken link, automated issue
